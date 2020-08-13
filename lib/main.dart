@@ -31,6 +31,12 @@ class MyHomeApp extends StatelessWidget {
     ),
   ];
 
+  // String inputTitle;
+  // String inputAmount;
+
+  final titleController = TextEditingController();
+  final amountController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -49,15 +55,52 @@ class MyHomeApp extends StatelessWidget {
               elevation: 5,
             ),
           ),
+          Card(
+            child: Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  TextField(
+                    decoration: InputDecoration(
+                      labelText: 'Title',
+                    ),
+                    // onChanged: (value) => inputTitle = value,
+                    controller: titleController,
+                  ),
+                  TextField(
+                    decoration: InputDecoration(
+                      labelText: 'Amount',
+                    ),
+                    // onChanged: (value) => inputAmount = value,
+                    controller: amountController,
+                  ),
+                  FlatButton(
+                    onPressed: () {
+                      print(titleController.text);
+                      print(amountController.text);
+                    },
+                    child: Text(
+                      'Add Transaction',
+                      style: TextStyle(
+                          color: Colors.purple,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16),
+                    ),
+                  )
+                ],
+              ),
+            ),
+          ),
           Column(
             children: transactions.map(
-              (tx) {
+              (transaction) {
                 return Card(
                   child: Row(
                     children: [
                       Container(
                         child: Text(
-                          '\$${tx.amount}',
+                          '\$${transaction.amount}',
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 20,
@@ -80,14 +123,14 @@ class MyHomeApp extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            tx.title,
+                            transaction.title,
                             style: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
                           Text(
-                            DateFormat().add_yMMMEd().format(tx.date),
+                            DateFormat().add_yMMMEd().format(transaction.date),
                             style: TextStyle(
                               color: Colors.grey,
                             ),
