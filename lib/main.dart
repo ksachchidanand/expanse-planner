@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 import './models/transaction.dart';
 
@@ -29,6 +30,12 @@ class MyHomePage extends StatelessWidget {
     ),
   ];
 
+  // String inputTitle;
+  // String inputAmount;
+
+  final titleController = TextEditingController();
+  final amountController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,7 +43,7 @@ class MyHomePage extends StatelessWidget {
         title: Text('Flutter App'),
       ),
       body: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Container(
@@ -47,10 +54,48 @@ class MyHomePage extends StatelessWidget {
               elevation: 5,
             ),
           ),
+          Card(
+            child: Padding(
+              padding: const EdgeInsets.all(15.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  TextField(
+                    decoration: InputDecoration(labelText: 'title'),
+                    // onChanged: (value) => inputTitle = value,
+                    controller: titleController,
+                  ),
+                  TextField(
+                    decoration: InputDecoration(labelText: 'amount'),
+                    // onChanged: (value) => inputAmount = value,
+                    controller: amountController,
+                  ),
+                  FlatButton(
+                    onPressed: () {
+                      // print(inputTitle);
+                      // print(inputAmount);
+                      print(titleController.text);
+                      print(amountController.text);
+                    },
+                    child: Text(
+                      'Add Transaction',
+                      style: TextStyle(
+                        color: Colors.purple,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16.0,
+                      ),
+                    ),
+                  )
+                ],
+              ),
+            ),
+          ),
           Column(
             children: transactions
                 .map(
                   (tx) => Card(
+                    elevation: 5,
+                    color: Colors.grey.shade200,
                     child: Row(
                       children: [
                         Container(
@@ -84,7 +129,12 @@ class MyHomePage extends StatelessWidget {
                                 fontSize: 16,
                               ),
                             ),
-                            Text(tx.date.toString()),
+                            Text(
+                              DateFormat.yMMMd().format(DateTime.now()),
+                              style: TextStyle(
+                                color: Colors.grey,
+                              ),
+                            ),
                           ],
                         ),
                       ],
