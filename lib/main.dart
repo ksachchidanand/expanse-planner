@@ -39,13 +39,54 @@ class MyHomePage extends StatelessWidget {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Card(
-            color: Colors.blue,
-            child: Text('CHART!'),
-            elevation: 5,
+          Container(
+            width: double.infinity,
+            child: Card(
+              color: Colors.blue,
+              child: Text('CHART!'),
+              elevation: 5,
+            ),
           ),
-          Card(
-            child: Text('LIST OF TX'),
+          Column(
+            children: transactions.map(
+              (tx) {
+                return Card(
+                  child: Row(
+                    children: [
+                      Container(
+                        margin: EdgeInsets.symmetric(
+                          vertical: 10,
+                          horizontal: 15,
+                        ),
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                            width: 3.0,
+                            color: Colors.teal,
+                          ),
+                        ),
+                        padding: EdgeInsets.all(10.0),
+                        child: Text(
+                          tx.amount.toString(),
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                      Column(
+                        children: [
+                          Text(
+                            tx.title,
+                          ),
+                          Text(
+                            tx.date.toString(),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                );
+              },
+            ).toList(),
           ),
         ],
       ),
