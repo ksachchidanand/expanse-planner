@@ -1,94 +1,30 @@
 import 'package:flutter/material.dart';
 
-import './transaction.dart';
-
-void main() => runApp(MyApp());
+void main() {
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter App',
-      home: MyHomePage(),
+      title: 'Expense Planner',
+      home: MyAppHome(),
     );
   }
 }
 
-class MyHomePage extends StatelessWidget {
-  final List<Transaction> transactions = [
-    Transaction(
-      id: 't1',
-      title: 'Banana',
-      amount: 24.25,
-      date: DateTime.now(),
-    ),
-    Transaction(
-      id: 't2',
-      title: 'Apple',
-      amount: 14.25,
-      date: DateTime.now(),
-    ),
-  ];
-
+class MyAppHome extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Flutter App'),
+        title: Text('Expense Planner'),
       ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Container(
-            width: double.infinity,
-            child: Card(
-              color: Colors.blue,
-              child: Text('CHART!'),
-              elevation: 5,
-            ),
-          ),
-          Column(
-            children: transactions.map(
-              (tx) {
-                return Card(
-                  child: Row(
-                    children: [
-                      Container(
-                        margin: EdgeInsets.symmetric(
-                          vertical: 10,
-                          horizontal: 15,
-                        ),
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                            width: 3.0,
-                            color: Colors.teal,
-                          ),
-                        ),
-                        padding: EdgeInsets.all(10.0),
-                        child: Text(
-                          tx.amount.toString(),
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                      Column(
-                        children: [
-                          Text(
-                            tx.title,
-                          ),
-                          Text(
-                            tx.date.toString(),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                );
-              },
-            ).toList(),
-          ),
-        ],
+      body: Container(
+        child: Center(
+          child: Text('body'),
+        ),
       ),
     );
   }
